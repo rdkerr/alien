@@ -1,4 +1,22 @@
-import Machine from "xstate";
+import { Machine } from "xstate";
+
+const requestStates = {
+  states: {
+    idle: {
+      on: {
+        REQUEST: "loading"
+      }
+    },
+    loading: {
+      on: {
+        RESOLVE: "success",
+        REJECT: "failure"
+      }
+    },
+    success: {},
+    failure: {}
+  }
+};
 
 export const alienMachine = Machine({
   id: "alien",
@@ -20,22 +38,26 @@ export const alienMachine = Machine({
     creating: {
       on: {
         END_CREATE: "sync"
-      }
+      },
+      ...requestStates
     },
     reading: {
       on: {
         END_READ: "sync"
-      }
+      },
+      ...requestStates
     },
     updating: {
       on: {
         END_UPDATE: "sync"
-      }
+      },
+      ...requestStates
     },
     deleting: {
       on: {
         END_DELETE: "sync"
-      }
+      },
+      ...requestStates
     }
   }
 });
