@@ -4,11 +4,10 @@ const requestStates = {
   states: {
     loading: {
       on: {
-        RESOLVE: "success",
+        RESOLVE: "sync",
         REJECT: "failure"
       }
     },
-    success: {},
     failure: {}
   }
 };
@@ -28,6 +27,11 @@ export const alienMachine = Machine({
         BEGIN_READ: "reading",
         BEGIN_UPDATE: "updating",
         BEGIN_DELETE: "deleting"
+      }
+    },
+    out_of_sync: {
+      on: {
+
       }
     },
     creating: {
