@@ -2,11 +2,6 @@ import { Machine } from "xstate";
 
 const requestStates = {
   states: {
-    idle: {
-      on: {
-        REQUEST: "loading"
-      }
-    },
     loading: {
       on: {
         RESOLVE: "success",
